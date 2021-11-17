@@ -4,10 +4,10 @@ const debug = require("debug")("tuitah:server");
 const chalk = require("chalk");
 const morgan = require("morgan");
 const cors = require("cors");
-// const {
-//   generalErrorHandler,
-//   notFoundErrorHandler,
-// } = require("./middlewares/errors");
+const {
+  generalErrorHandler,
+  notFoundErrorHandler,
+} = require("./middlewares/errors");
 
 const app = express();
 
@@ -16,11 +16,10 @@ const serveRoutes = () => {
   app.use(morgan("dev"));
   app.use(express.json());
 
-  // app.use("/robots", isAuth, robotsRoutes);
   // app.use("/user", usersRoutes);
 
-  // app.use(notFoundErrorHandler);
-  // app.use(generalErrorHandler);
+  app.use(notFoundErrorHandler);
+  app.use(generalErrorHandler);
 };
 
 const initializeServer = (port) => {
