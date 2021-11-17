@@ -5,18 +5,14 @@ const mongoose = require("mongoose");
 
 const connectDB = () =>
   new Promise((resolve, reject) => {
-    // mongoose.set("debug", true);
-    // mongoose.set("toJSON", {
-    //   virtuals: true,
-    //   transform: (doc, ret) => {
-    //     delete ret._id;
-    //     delete ret.__v;
-    //   },
-    // });
-    //Los virtuals son propiedades que dependen de otras propiedades o que
-    //mongoose nos ha hecho aparecer. Por ejemplo, en un input de edad, un virtual
-    //seria isMajorAge: true, el cual depende de la edad y el usuario no
-    //lo pone directameente
+    mongoose.set("debug", true);
+    mongoose.set("toJSON", {
+      virtuals: true,
+      transform: (doc, ret) => {
+        delete ret._id;
+        delete ret.__v;
+      },
+    });
 
     mongoose.connect(process.env.MONGODB_TUITAH, (error) => {
       if (error) {

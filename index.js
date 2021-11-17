@@ -1,6 +1,6 @@
 const connectDB = require("./database");
 const initializeServer = require("./server");
-const { generalErrorHandler } = require("./middlewares/errors");
+const { generalErrorHandler } = require("./server/middlewares/errors");
 
 require("dotenv").config();
 
