@@ -8,6 +8,7 @@ const {
   generalErrorHandler,
   notFoundErrorHandler,
 } = require("./middlewares/errors");
+const tuitsRoutes = require("./routes/tuitsRoutes");
 
 const app = express();
 
@@ -16,7 +17,7 @@ const serveRoutes = () => {
   app.use(morgan("dev"));
   app.use(express.json());
 
-  // app.use("/user", usersRoutes);
+  app.use("/tuits", tuitsRoutes);
 
   app.use(notFoundErrorHandler);
   app.use(generalErrorHandler);
