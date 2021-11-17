@@ -4,12 +4,12 @@ const { generalErrorHandler } = require("./server/middlewares/errors");
 
 require("dotenv").config();
 
-const port = process.env.SERVER_PORT ?? 5000;
+const port = process.env.PORT ?? process.env.SERVER_PORT ?? 5000;
 
 (async () => {
   try {
     await connectDB();
-    initializeServer(5000);
+    initializeServer(port);
   } catch (error) {
     generalErrorHandler;
   }
