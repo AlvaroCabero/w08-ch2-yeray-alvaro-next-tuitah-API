@@ -6,6 +6,6 @@ const { validate } = require("express-validation");
 const router = express.Router();
 
 router.get("/", getTuits);
-router.post("/new", validate(tuitSchema), createTuit);
+router.post("/new", createTuit);
 
 module.exports = router;
