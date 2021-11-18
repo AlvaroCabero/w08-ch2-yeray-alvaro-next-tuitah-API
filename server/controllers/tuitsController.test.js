@@ -1,6 +1,6 @@
 require("dotenv").config();
 const Tuit = require("../../database/models/tuit");
-const { getTuits, createTuit } = require("./tuitsController");
+const { getTuits, createTuit, deleteTuit } = require("./tuitsController");
 
 jest.mock("../../database/models/tuit");
 
@@ -44,6 +44,59 @@ describe("Given a createTuit function", () => {
       await createTuit(req, res);
 
       expect(res.json).toHaveBeenCalledWith(req.body);
+    });
+  });
+});
+
+describe("Given a deleteTuit function", () => {
+  describe("When it receives an req object with and id 2, a res object and a next function", () => {
+    test("Then it should invoke the method json with the tuit and the method Tuit.findByIdAndDelete with the id 2, ", async () => {
+      const tuit = {
+        id: 2,
+        text: "Hola",
+        date: "",
+        likes: 5,
+      };
+
+      const req = {
+        params: {
+          id: 2,
+        },
+      };
+
+      const res = {
+        json: jest.fn(),
+        status: () => {},
+      };
+
+      const next = jest.fn();
+
+      Tuit.findByIdAndDelete = jest.fn().mockResolvedValue(tuit);
+
+      await deleteTuit(req, res, next);
+
+      expect(Tuit.findByIdAndDelete).toHaveBeenCalledWith(tuit.id);
+      expect(res.json).toHaveBeenCalledWith(tuit);
+    });
+
+    describe("When its method Tuit.findByIdAndDelete is rejected", () => {
+      test("Then it should invoke next function with the error rejected", async () => {
+        const error = {};
+        Tuit.findByIdAndDelete = jest.fn().mockRejectedValue(error);
+        const req = {
+          params: {
+            id: 0,
+          },
+        };
+        const res = {
+          json: () => {},
+        };
+        const next = jest.fn();
+
+        await deleteTuit(req, res, next);
+
+        expect(next).toHaveBeenCalledWith(error);
+      });
     });
   });
 });
