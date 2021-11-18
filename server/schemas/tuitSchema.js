@@ -8,5 +8,5 @@ const tuitSchema = {
 };
 
 module.exports = {
-  loginRequestSchema,
+  tuitSchema,
 };

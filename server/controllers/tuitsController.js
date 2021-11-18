@@ -17,7 +17,7 @@ const createTuit = async (req, res, next) => {
     res.json(newTuit);
   } catch (error) {
     error.code = 400;
-    error.message = "The tuit could not been be created";
+    error.message = "The tuit could not be created";
     next(error);
   }
 };
