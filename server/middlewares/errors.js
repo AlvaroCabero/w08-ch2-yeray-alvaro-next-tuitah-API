@@ -1,4 +1,4 @@
-const debug = require("debug")("users:errors");
+const debug = require("debug")("tuits:errors");
 const chalk = require("chalk");
 // const { ValidationError } = require("express-validation");
 
